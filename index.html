@@ -25,22 +25,22 @@ main{max-width:1100px;margin:0 auto;padding:0 18px 80px}
 h2{font-size:clamp(30px,5vw,48px);margin:40px 0 6px}
 .lead{color:var(--mute);max-width:640px;margin:0 0 24px}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:16px;perspective:1000px}
-.card{background:var(--bg2);border:2px solid var(--line);border-left:6px solid var(--grass);padding:16px 18px;transform-origin:50% 100%;will-change:transform,opacity}
+.card{--gl:var(--grass);background:color-mix(in srgb,var(--bg2) 58%,transparent);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border:1px solid color-mix(in srgb,var(--ink) 14%,transparent);border-left:3px solid color-mix(in srgb,var(--gl) 75%,transparent);border-radius:14px;padding:16px 18px}
 .card h3{margin:0 0 4px;font-size:20px}.card p{margin:4px 0;color:var(--mute);font-size:14.5px}
 .tag{display:inline-block;font:500 12px 'Pixelify Sans';padding:2px 8px;background:var(--bg);border:1px solid var(--line);margin:0 4px 6px 0;color:var(--dia)}
-.go{cursor:pointer;border-left-color:var(--dia)}.go:hover h3{color:var(--dia)}
+.go{cursor:pointer;--gl:var(--dia)}.go:hover h3{color:var(--dia)}
 .bar{height:12px;background:var(--bg);border:1px solid var(--line);margin:6px 0}.bar b{display:block;height:100%;background:var(--dia);transform-origin:left;transform:scaleX(var(--w,0));transition:transform 1s}
-.k-Arma,.k-Maça{border-left-color:var(--red)}.k-Armadura{border-left-color:var(--dia)}.k-Maldição{border-left-color:#a35fd6}.k-Arco,.k-Besta,.k-Tridente,.k-Pesca{border-left-color:var(--gold)}
+.k-Arma,.k-Maça{--gl:var(--red)}.k-Armadura{--gl:var(--dia)}.k-Maldição{--gl:#a35fd6}.k-Arco,.k-Besta,.k-Tridente,.k-Pesca{--gl:var(--gold)}.d-Overworld,.d-Subterrâneo{--gl:#68b236}.d-Nether{--gl:#ff8a2a}.d-End{--gl:#a56bff}
 .tools{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 20px}
 .chip,input{font:400 14px Lexend,sans-serif;color:var(--ink);background:var(--bg2);border:2px solid var(--line);padding:8px 12px;border-radius:0}
 .chip{cursor:pointer}.chip.on{background:var(--dia);color:#06201d;border-color:var(--dia)}
 .steps{counter-reset:s;display:grid;gap:14px;perspective:1000px;margin:0 0 10px}
-.steps .card{counter-increment:s;padding-left:64px;position:relative;border-left-color:var(--gold)}
+.steps .card{counter-increment:s;padding-left:64px;position:relative;--gl:var(--gold)}
 .steps .card:before{content:counter(s);position:absolute;left:14px;top:14px;width:36px;height:36px;display:grid;place-items:center;background:var(--gold);color:#241a00;font:700 20px 'Pixelify Sans'}
 .note{background:var(--bg2);border:2px dashed var(--line);padding:14px;margin:18px 0;color:var(--mute);font-size:14.5px}
 footer{text-align:center;color:var(--mute);font-size:13px;padding:30px 18px}
 .fg{grid-template-columns:repeat(auto-fill,minmax(310px,1fr))}.iso{width:100%;display:block;background:linear-gradient(var(--bg),var(--bg2));border:1px solid var(--line);margin:8px 0}ol{padding-left:20px;margin:6px 0;color:var(--mute);font-size:14px}li{margin:3px 0}
-@media (prefers-reduced-motion:reduce){.hint{animation:none}.card{transform:none!important;opacity:1!important}.bar b{transition:none}}
+@media (prefers-reduced-motion:reduce){.hint{animation:none}.r3d{transform:none!important;transition:opacity .4s ease!important}.panel.on{animation:none}.bar b{transition:none}}
 
 
 #hero{height:1200vh;position:relative;background:#000;color:#fff}
@@ -61,6 +61,14 @@ footer{text-align:center;color:var(--mute);font-size:13px;padding:30px 18px}
 #hero .bt button.on{background:#fff;color:#14081f}
 #hero .bt button:focus-visible{outline:3px solid #b982ff;outline-offset:2px}
 #hero .nt{margin:6px 0 0;text-align:center;font-size:11px;opacity:.6}
+
+body{background:radial-gradient(900px 520px at 12% 8%,rgba(104,178,54,.10),transparent 60%),radial-gradient(800px 520px at 92% 28%,rgba(140,80,230,.10),transparent 60%),var(--bg);background-attachment:fixed}
+.r3d{opacity:0;transform:translateY(45px) scale(.96);transition:opacity .65s cubic-bezier(.22,1,.36,1),transform .65s cubic-bezier(.22,1,.36,1),border-color .25s ease,box-shadow .25s ease}
+.r3d.visible{opacity:1;transform:translateY(0) scale(1)}.r3d.done{transition:opacity .3s ease,transform .25s ease,border-color .25s ease,box-shadow .25s ease}
+.card.visible:hover{transform:translateY(-5px);border-color:color-mix(in srgb,var(--gl) 70%,transparent);box-shadow:0 12px 32px -10px color-mix(in srgb,var(--gl) 60%,transparent),0 0 0 1px color-mix(in srgb,var(--gl) 35%,transparent)}
+.panel.on{animation:tabIn .3s ease both}@keyframes tabIn{from{opacity:0}to{opacity:1}}
+.up{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:30;font:500 13px 'Pixelify Sans',monospace;color:var(--ink);background:color-mix(in srgb,var(--bg2) 72%,transparent);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border:1px solid color-mix(in srgb,var(--ink) 18%,transparent);border-radius:999px;padding:9px 15px;cursor:pointer;opacity:0;pointer-events:none;transform:translateY(10px);transition:opacity .3s ease,transform .3s ease,border-color .2s,box-shadow .2s}
+.up.on{opacity:1;pointer-events:auto;transform:none}.up:hover{border-color:var(--grass);box-shadow:0 0 18px -4px var(--grass)}.up:focus-visible{outline:3px solid var(--dia);outline-offset:2px}
 </style>
 </head>
 <body>
@@ -71,6 +79,7 @@ footer{text-align:center;color:var(--mute);font-size:13px;padding:30px 18px}
 <div class="hud"><div class="bar"><i id="pg"></i></div><div class="bt"><button data-t=".04">Overworld</button><button data-t=".5">Nether</button><button data-t=".88">The End</button><button data-t="w">Explorar Wiki ▼</button></div><p class="nt">Projeto de fã sem vínculo com a Mojang</p></div></div></section>
 <main id="app"></main>
 <footer>Minecraft Atlas é um projeto de fã, sem vínculo com a Mojang. Valores baseados na Edição Java 1.21; podem variar na Bedrock.</footer>
+<button id="up" class="up" type="button" aria-label="Voltar ao Portal 3D">↑ Voltar ao Portal 3D</button>
 <script>
 const cube=c=>`<div class="cube ${c}"><i></i><i></i><i></i><i></i><i></i><i></i></div>`;
 const T=[["inicio","Início"],["encantamentos","Encantamentos"],["pocoes","Poções"],["armaduras","Armaduras"],["mobs","Mobs"],["farms","Farms"],["biomas","Biomas"]];
@@ -107,21 +116,27 @@ function fill(id,data,fn){$(id).innerHTML=data.map(fn).join('');upd()}
 const eCard=e=>card(e[0]+" "+e[1],`<p>${e[3]}</p>`,tag(e[4])+tag(e[2]),'k-'+e[4]);
 const hooks={encantamentos(){fill('#eg',E,eCard);$('#q').oninput=ev=>{const v=ev.target.value.toLowerCase();fill('#eg',E.filter(e=>e.join(' ').toLowerCase().includes(v)),eCard)}},
 mobs(){const f=t=>fill('#mg',M.filter(m=>t=='Todos'||m[1]==t),m=>card(m[0],`<p>${m[3]}</p>`,tag(m[1])+tag(m[2]+" de vida"),m[1]=='Hostil'||m[1]=='Chefe'?'k-Arma':''));f('Todos');chips('#mf',f)},
-biomas(){const f=t=>fill('#bg',B.filter(b=>t=='Todos'||b[1]==t),b=>card(b[0],`<p>${b[3]}</p>`,tag(b[1])+tag(b[2])));f('Todos');chips('#bf',f)}};
+biomas(){const f=t=>fill('#bg',B.filter(b=>t=='Todos'||b[1]==t),b=>card(b[0],`<p>${b[3]}</p>`,tag(b[1])+tag(b[2]),'d-'+b[1]));f('Todos');chips('#bf',f)}};
 function chips(s,f){document.querySelectorAll(s+' .chip').forEach(c=>c.onclick=()=>{document.querySelectorAll(s+' .chip').forEach(x=>x.classList.toggle('on',x==c));f(c.dataset.f)})}
 const rm=matchMedia('(prefers-reduced-motion:reduce)');
-function upd(){const vh=innerHeight;
-document.querySelectorAll('.panel.on .r3d').forEach(el=>{const r=el.getBoundingClientRect(),p=rm.matches?1:Math.max(0,Math.min(1,(vh-r.top)/(vh*.35)));el.style.transform=p<1?`rotateX(${(1-p)*55}deg) translateZ(${(p-1)*160}px)`:'';el.style.opacity=.15+.85*p;
-const b=el.querySelector('.bar b');if(b&&p>.6)b.style.setProperty('--w',b.getAttribute('style').match(/--w:([\d.]+)/)?.[1]||b.style.getPropertyValue('--w'))})}
+let rvIO=null;
+function revealBatch(es){const m=es.filter(e=>e.isIntersecting).sort((a,b)=>a.boundingClientRect.top-b.boundingClientRect.top||a.boundingClientRect.left-b.boundingClientRect.left);let row=-1,lastTop=-1e9,col=0;
+m.forEach(e=>{const t=e.boundingClientRect.top;if(Math.abs(t-lastTop)>12){row++;col=0;lastTop=t}else col++;const el=e.target,dl=row*100+col*80;rvIO.unobserve(el);el.style.transitionDelay=dl+'ms';el.classList.add('visible');setTimeout(()=>{el.style.transitionDelay='';el.classList.add('done')},650+dl+50)})}
+function observeRv(els){if(!('IntersectionObserver' in window)){els.forEach(el=>el.classList.add('visible'));return}if(!rvIO)rvIO=new IntersectionObserver(revealBatch,{threshold:.15,rootMargin:'0px 0px -60px 0px'});els.forEach(el=>{el.classList.add('seen');rvIO.observe(el)})}
+function initScrollReveal(){if(rvIO)rvIO.disconnect();const els=[...document.querySelectorAll('.panel.on .r3d')];els.forEach(el=>{el.classList.remove('visible','done','seen');el.style.transitionDelay=''});void document.body.offsetHeight;observeRv(els)}
+function upd(){observeRv([...document.querySelectorAll('.panel.on .r3d:not(.seen)')])}
 function show(id){if(!T.some(t=>t[0]==id))id='inicio';const app=$('#app');app.innerHTML=`<div class="panel on">${R[id]()}</div>`;
 document.querySelectorAll('#tabs button').forEach(b=>b.setAttribute('aria-selected',b.dataset.t==id));
 (hooks[id]||(()=>{}))();app.querySelectorAll('[data-go]').forEach(c=>{c.onclick=()=>go(c.dataset.go);c.onkeydown=e=>e.key=='Enter'&&go(c.dataset.go)});
-if(id=='inicio'){if(window._f)scrollTo({top:0,behavior:'smooth'})}else scrollTo({top:app.getBoundingClientRect().top+scrollY-58});window._f=1;upd()}
-function go(id){try{location.hash=id}catch(e){show(id)}}
+if(id=='inicio'){if(window._f)scrollTo({top:0,behavior:'smooth'})}else scrollTo({top:app.getBoundingClientRect().top+scrollY-58});window._f=1;initScrollReveal()}
+function go(id){if(location.hash.slice(1)==id)show(id);else{try{location.hash=id}catch(e){show(id)}}}
 $('#tabs').innerHTML=T.map(([id,n])=>`<button role="tab" data-t="${id}">${n}</button>`).join('');
 $('#tabs').onclick=e=>e.target.dataset.t&&go(e.target.dataset.t);
 addEventListener('hashchange',()=>show(location.hash.slice(1)));
-addEventListener('scroll',()=>requestAnimationFrame(upd),{passive:true});addEventListener('resize',upd);
+const up=$('#up'),heroEl=$('#hero');let tk=0;
+function chkUp(){tk=0;up.classList.toggle('on',heroEl.getBoundingClientRect().bottom<innerHeight*.5)}
+addEventListener('scroll',()=>{if(!tk)tk=requestAnimationFrame(chkUp)},{passive:true});addEventListener('resize',chkUp);chkUp();
+up.onclick=()=>scrollTo({top:0,behavior:'smooth'});
 Object.assign(K,{l:["#ff8a1c",1],r:["#d63a2e",1],e:["#bfeaf5",1],u:["#3b6b2a",2]});
 const CATS=["Todas","Mobs","Minérios e recursos","Comida","Animais","Outras"],MR="Minérios e recursos",FC={"Farm de ferro":MR,"Farm de XP":"Mobs","Farm de cultivos":"Comida","Farm de cana-de-açúcar":MR,"Farm de bambu":MR,"Farm de lã":"Animais","Farm de ouro":MR,"Farm de pólvora":"Mobs","Farm de Enderman":"Mobs","Farm de abóbora e melancia":"Comida","Farm de peixes":"Comida","Farm de mel":"Comida"};
 const add=a=>a.forEach(([n,d,r,c,m,mt,st,md,im])=>{F.push([n,d,r,'']);FD[n]=[m,mt,st];FS[n]=fs(md,im);FC[n]=c});
